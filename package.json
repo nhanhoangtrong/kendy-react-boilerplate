@@ -1,0 +1,9 @@
+{
+  "name": "react-boilerplate",
+  "version": "0.1.0",
+  "description": "A React starter kit for quick building web app",
+  "main": "index.js",
+  "repository": "git@github.com:nhanhoangtrong/kendy-react-boilerplate",
+  "author": "Nhan Hoang <siege250294@gmail.com>",
+  "license": "MIT"
+}
