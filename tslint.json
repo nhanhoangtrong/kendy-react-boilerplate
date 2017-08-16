@@ -5,7 +5,7 @@
     ],
     "jsRules": {},
     "rules": {
-        "quotemark": [true, "single", "avoid-escape"],
+        "quotemark": [false],
         "max-line-length": [false],
         "interface-name": [false],
         "object-literal-sort-keys": [false],
