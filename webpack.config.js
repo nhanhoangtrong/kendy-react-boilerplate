@@ -11,6 +11,8 @@ dotenv.load({
     path: path.join(__dirname, '.env'),
 });
 
+const vendors = Object.keys(require('./package.json').dependencies);
+
 module.exports = (env = {}) => {
     const isProduction = env.production == 'true' || process.env.NODE_ENV === 'production';
 
@@ -54,8 +56,8 @@ module.exports = (env = {}) => {
             __DEV__: !isProduction,
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            filename: 'vendor.bundle.js',
+            name: 'vendors',
+            filename: 'vendors.bundle.js',
             minChunks: Infinity,
         }),
         new CleanWebpackPlugin(['dist']),
@@ -82,19 +84,19 @@ module.exports = (env = {}) => {
         },
     };
 
+    const entry = isProduction ? {
+        app: './index.ts',
+        vendors: vendors,
+    } : {
+        app: [
+            'react-hot-loader/patch',
+            './index.ts',
+        ],
+        vendors: vendors,
+    };
+
     const defaultConfig = {
-        entry: {
-            app: isProduction ? './index.tsx' : [
-                'react-hot-loader/patch',
-                './index.tsx',
-            ],
-            vendor: [
-                'react',
-                'react-dom',
-                'redux',
-                'lodash',
-            ],
-        },
+        entry: entry,
         resolve: {
             modules: [
                 'node_modules',
@@ -108,7 +110,7 @@ module.exports = (env = {}) => {
         target: 'web',
         context: sourcePath,
         output: {
-            filename: 'bundle.js',
+            filename: '[name].bundle.js',
             path: buildPath,
             publicPath: publicPath,
         },
@@ -139,7 +141,7 @@ module.exports = (env = {}) => {
                     ],
                 },
                 {
-                    test: /\.styl/,
+                    test: /\.styl$/,
                     use: extractStylusPlugin.extract({
                         fallback: 'style-loader',
                         use: [
@@ -158,7 +160,7 @@ module.exports = (env = {}) => {
                     }),
                 },
                 {
-                    test: /\.(png|jpg|jpeg|gif)/,
+                    test: /\.(png|jpg|jpeg|gif)$/,
                     use: [
                         'file-loader',
                     ],
