@@ -6,6 +6,7 @@
     "dev": "webpack-dev-server --progress --env.production=false",
     "build": "webpack --progress --env.production=true",
     "start": "webpack --progress --env.production=true && http-server ./dist -o",
+    "serve": "http-server ./dist -o",
     "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "main": "index.js",
