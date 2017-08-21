@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import { RootDispatch } from '../store';
 import MainApp from '../components/MainApp';
 
-interface MainAppContainerDispatchProps extends React.Props<any> {
+export interface MainAppContainerDispatchProps extends React.Props<any> {
     push: ReduxActions.ActionFunction1<string, ReduxActions.Action<string>>;
 }
 

@@ -4,7 +4,7 @@ import * as classNames from 'classnames';
 import * as styles from './style.styl';
 import { ActionFunction1, Action } from "redux-actions";
 
-interface InputTodoProps extends React.Props<any> {
+export interface InputTodoProps extends React.Props<any> {
     text?: string;
     placeholder?: string;
     editing?: boolean;
@@ -13,7 +13,7 @@ interface InputTodoProps extends React.Props<any> {
     onCancel?(): any;
 }
 
-interface InputTodoState extends React.ComponentState {
+export interface InputTodoState extends React.ComponentState {
     text: string;
 }
 

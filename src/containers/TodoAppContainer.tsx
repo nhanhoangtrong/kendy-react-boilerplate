@@ -7,13 +7,13 @@ import TodoApp from '../components/TodoApp';
 import * as GlobalsActions from '../actions/globals';
 import * as TodosActions from '../actions/todos';
 
-interface TodoAppContainerStateProps extends React.Props<any> {
+export interface TodoAppContainerStateProps extends React.Props<any> {
     filter: TodoFilterType;
     isLoading: boolean;
     todos: TodoItemData[];
 }
 
-interface TodoAppContainerDispatchProps extends React.Props<any> {
+export interface TodoAppContainerDispatchProps extends React.Props<any> {
     globalsActions: any;
     todosActions: any;
 }

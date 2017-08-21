@@ -3,7 +3,7 @@ import TodoItemContainer from '../../containers/TodoItemContainer';
 import * as styles from './style.styl';
 import InputTodo from '../InputTodo';
 
-interface TodoListProps extends React.Props<any> {
+export interface TodoListProps extends React.Props<any> {
     todos: TodoItemData[];
     addTodo: (todo: TodoItemData) => any;
 }

@@ -8,4 +8,3 @@ declare interface TodoItemData {
 declare type TodoItemId = string;
 
 declare type TodoFilterType = 'SHOW_ALL' | 'SHOW_ACTIVE' | 'SHOW_COMPLETED';
-

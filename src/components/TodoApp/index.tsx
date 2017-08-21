@@ -1,14 +1,14 @@
 import * as React from 'react';
 import * as styles from './style.styl';
 import * as classNames from 'classnames';
-import { Route, Link, RouteComponentProps } from 'react-router-dom';
+import { Route, RouteComponentProps } from 'react-router';
 import NavBar from '../NavBar';
 
 import InputTodo from '../InputTodo';
 import TodoList from '../TodoList';
 import LoadingIndicator from '../LoadingIndicator';
 
-interface TodoAppProps extends RouteComponentProps<any> {
+export interface TodoAppProps extends RouteComponentProps<any> {
     isLoading: boolean;
     filter: TodoFilterType;
     globalsActions: any;

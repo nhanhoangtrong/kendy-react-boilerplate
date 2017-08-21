@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as styles from './style.styl';
 import Transition from 'react-transition-group/Transition';
 
-interface LoadingIndicatorProps extends React.Props<any> {
+export interface LoadingIndicatorProps extends React.Props<any> {
     visible: boolean;
     duration?: number;
 }
@@ -39,6 +39,7 @@ export default class LoadingIndicator extends React.Component<LoadingIndicatorPr
                         style={{
                             ...defaultStyle,
                             ...transitionStyles[state],
+                            display: this.props.visible ? 'block' : 'none',
                         }}>
                         Loading...
                     </div>

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Link from '../containers/Link';
 import { MainAppContainerProps } from '../containers/MainAppContainer';
 
 export type MainAppProps = MainAppContainerProps;
@@ -13,6 +14,7 @@ export default class MainApp extends React.Component<MainAppContainerProps, {}> 
         return (
             <div>
                 <button type="button" onClick={this.onClickGoTodo}>Request Todo App</button>
+                <Link to="/todo">Request todo</Link>
             </div>
         );
     }
