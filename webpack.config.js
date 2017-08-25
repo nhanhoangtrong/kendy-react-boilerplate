@@ -38,12 +38,14 @@ module.exports = (env = {}) => {
     };
 
     const extractCSSPlugin = new ExtractTextPlugin({
-        filename: 'css.css',
+        filename: '[id].css',
         disable: !isProduction,
+        ignoreOrder: true,
     });
     const extractStylusPlugin = new ExtractTextPlugin({
-        filename: 'stylus.css',
+        filename: '[id].css',
         disable: !isProduction,
+        ignoreOrder: true,
     })
 
     const plugins = [
