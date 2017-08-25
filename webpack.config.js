@@ -160,9 +160,12 @@ module.exports = (env = {}) => {
                     }),
                 },
                 {
-                    test: /\.(png|jpg|jpeg|gif)$/,
+                    test: /\.(png|jpe?g|gif|svg)$/,
                     use: [
-                        'file-loader',
+                        {
+                            loader: 'file-loader',
+                            options: {},
+                        }
                     ],
                 },
             ],
