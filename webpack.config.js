@@ -31,7 +31,13 @@ module.exports = (env = {}) => {
         contentBase: buildPath,
         host: devHost,
         port: devPort,
-        historyApiFallback: true,
+        historyApiFallback: {
+            // Fixing public path for generated HTML file in development
+            index: publicPath,
+            rewrites: {
+                from: /./, to: publicPath,
+            },
+        },
         hot: true,
         inline: true,
         publicPath,
