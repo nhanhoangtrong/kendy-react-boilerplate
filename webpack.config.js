@@ -26,7 +26,7 @@ module.exports = (env = {}) => {
     const sourcePath = path.join(__dirname, 'src');
     const buildPath = path.join(__dirname, 'dist');
 
-    const devtool = isProduction ? 'cheap-source-map' : 'source-map';
+    const devtool = isProduction ? 'eval-source-map' : 'source-map';
     const devServer = {
         contentBase: buildPath,
         host: devHost,
@@ -73,24 +73,19 @@ module.exports = (env = {}) => {
         extractStylusPlugin,
     ];
     if (!isProduction) {
-        plugins.push(new webpack.HotModuleReplacementPlugin());
+        plugins.concat([
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NamedModulesPlugin(),
+        ]);
     } else {
-        plugins.push(new UglifyJSPlugin({
-            uglufyOptions: {
-                warnings: true,
-            },
-        }));
+        plugins.concat([
+            new UglifyJSPlugin({
+                uglifyOptions: {
+                    warnings: true,
+                },
+            }),
+        ]);
     }
-
-    const cssLoaderConfig = {
-        loader: 'css-loader',
-        options: {
-            modules: true,
-            sourceMap: !isProduction,
-            importLoaders: 1,
-            localIdentName: '[local]__[hash:base64:5]',
-        },
-    };
 
     const entry = isProduction ? {
         app: './index.ts',
@@ -153,7 +148,16 @@ module.exports = (env = {}) => {
                     use: extractStylusPlugin.extract({
                         fallback: 'style-loader',
                         use: [
-                            cssLoaderConfig,
+                            {
+                                // Stylus CSS Modules config
+                                loader: 'css-loader',
+                                options: {
+                                    modules: true,
+                                    sourceMap: !isProduction,
+                                    importLoaders: 1,
+                                    localIdentName: '[local]__[hash:base64:5]',
+                                },
+                            },
                             'stylus-loader',
                         ],
                     }),
@@ -163,7 +167,16 @@ module.exports = (env = {}) => {
                     use: extractCSSPlugin.extract({
                         fallback: 'style-loader',
                         use: [
-                            cssLoaderConfig,
+                            {
+                                // Simple CSS Modules without PostCSS
+                                loader: 'css-loader',
+                                options: {
+                                    modules: true,
+                                    sourceMap: !isProduction,
+                                    importLoaders: 1,
+                                    localIdentName: '[local]__[hash:base64:5]',
+                                },
+                            },
                         ],
                     }),
                 },
@@ -172,8 +185,21 @@ module.exports = (env = {}) => {
                     use: [
                         {
                             loader: 'file-loader',
-                            options: {},
+                            options: {
+                                name: '[path][name].[ext]',
+                            },
                         }
+                    ],
+                },
+                {
+                    test: /\.(eot|ttf|woff|woff2)$/,
+                    use: [
+                        {
+                            loader: 'file-loader',
+                            options: {
+                                name: '[path][name].[ext]',
+                            },
+                        },
                     ],
                 },
             ],
