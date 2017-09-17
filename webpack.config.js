@@ -26,7 +26,7 @@ module.exports = (env = {}) => {
     const sourcePath = path.join(__dirname, 'src');
     const buildPath = path.join(__dirname, 'dist');
 
-    const devtool = isProduction ? 'eval-source-map' : 'source-map';
+    const devtool = isProduction ? 'source-map' : 'eval-source-map';
     const devServer = {
         contentBase: buildPath,
         host: devHost,
@@ -52,7 +52,7 @@ module.exports = (env = {}) => {
         filename: '[id].css',
         disable: !isProduction,
         ignoreOrder: true,
-    })
+    });
 
     const plugins = [
         new HtmlWebpackPlugin({
