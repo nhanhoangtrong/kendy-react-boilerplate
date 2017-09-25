@@ -12,7 +12,7 @@ const defaultStyle = {
     opacity: 0,
 };
 
-interface TransitionStype<T> {
+interface TransitionStyle<T> {
     [key: string]: object;
 }
 
