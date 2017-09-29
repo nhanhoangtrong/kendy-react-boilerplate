@@ -108,7 +108,10 @@ module.exports = (env = {}) => {
                 '.ts', '.tsx',
                 '.js', '.jsx',
                 '.json',
-            ]
+            ],
+            alias: {
+                '@': path.resolve(__dirname, 'src/'),
+            },
         },
         target: 'web',
         context: sourcePath,
@@ -181,7 +184,7 @@ module.exports = (env = {}) => {
                     }),
                 },
                 {
-                    test: /\.(png|jpe?g|gif|svg)$/,
+                    test: /\.(png|jpe?g|gif|svg|eot|ttf|woff2?))$/,
                     use: [
                         {
                             loader: 'file-loader',
@@ -189,17 +192,6 @@ module.exports = (env = {}) => {
                                 name: '[path][name].[ext]',
                             },
                         }
-                    ],
-                },
-                {
-                    test: /\.(eot|ttf|woff|woff2)$/,
-                    use: [
-                        {
-                            loader: 'file-loader',
-                            options: {
-                                name: '[path][name].[ext]',
-                            },
-                        },
                     ],
                 },
             ],
