@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { RootState } from '../reducers';
-import { RootDispatch } from '../store';
-import TodoApp from '../components/TodoApp';
-import * as GlobalsActions from '../actions/globals';
-import * as TodosActions from '../actions/todos';
+import TodoApp from '../../components/TodoApp';
+import * as GlobalsActions from '../MainApp/actions';
+import * as TodosActions from './actions';
 
 export interface TodoAppContainerStateProps extends React.Props<any> {
     filter: TodoFilterType;
@@ -20,9 +18,9 @@ export interface TodoAppContainerDispatchProps extends React.Props<any> {
 
 export type TodoAppContainerProps = TodoAppContainerStateProps & TodoAppContainerDispatchProps;
 
-const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: any) => {
     const filter = state.globals.get('filter');
-    const todos = state.todos.filter((todo) => {
+    const todos = state.todos.filter((todo: any) => {
         return true;
     });
     return {
@@ -32,7 +30,7 @@ const mapStateToProps = (state: RootState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: RootDispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
     globalsActions: bindActionCreators(GlobalsActions as any, dispatch),
     todosActions: bindActionCreators(TodosActions as any, dispatch),
 });

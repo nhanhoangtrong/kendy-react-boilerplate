@@ -184,7 +184,7 @@ module.exports = (env = {}) => {
                     }),
                 },
                 {
-                    test: /\.(png|jpe?g|gif|svg|eot|ttf|woff2?))$/,
+                    test: /\.(png|jpe?g|gif|svg|eot|ttf|woff2?)$/,
                     use: [
                         {
                             loader: 'file-loader',
@@ -201,5 +201,6 @@ module.exports = (env = {}) => {
     return Object.assign({}, defaultConfig, {
         devtool,
         plugins,
-    }, isProduction ? {} : { devServer });
+        devServer,
+    });
 };

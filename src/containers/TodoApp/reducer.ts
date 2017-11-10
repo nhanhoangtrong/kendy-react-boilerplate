@@ -1,17 +1,16 @@
 import { handleActions } from 'redux-actions';
-import * as uuidv1 from 'uuid/v1';
-import * as ActionTypes from '../types';
+import * as ActionTypes from './constants';
 
 const initialState: TodoItemData[] = [{
-    id: uuidv1(),
+    id: '1',
     text: 'Temp Todo',
     completed: false,
 }];
 
-export default handleActions<TodoStoreState, TodoItemData>({
+export default handleActions<any, any>({
     [ActionTypes.ADD_TODO]: (state, action) => {
         return [{
-            id: uuidv1(),
+            id: Math.random().toString(),
             completed: false,
             ...action.payload,
         }, ...state];
@@ -22,7 +21,7 @@ export default handleActions<TodoStoreState, TodoItemData>({
     },
 
     [ActionTypes.EDIT_TODO]: (state, action) => {
-        return state.map((todo) => {
+        return state.map((todo: any) => {
             return todo.id === action.payload.id ? {
                 ...todo,
                 text: action.payload.text,
@@ -31,7 +30,7 @@ export default handleActions<TodoStoreState, TodoItemData>({
     },
 
     [ActionTypes.COMPLETE_TODO]: (state, action) => {
-        return state.map((todo) => {
+        return state.map((todo: any) => {
             return todo.id === action.payload ? {
                 ...todo,
                 completed: !todo.completed,
@@ -40,14 +39,14 @@ export default handleActions<TodoStoreState, TodoItemData>({
     },
 
     [ActionTypes.COMPLETE_ALL]: (state, action) => {
-        const allAreMarked = state.every((todo) => todo.completed);
-        return state.map((todo) => ({
+        const allAreMarked = state.every((todo: any) => todo.completed);
+        return state.map((todo: any) => ({
             ...todo,
             completed: !allAreMarked,
         }));
     },
 
     [ActionTypes.CLEAR_COMPLETED]: (state, action) => {
-        return state.filter((todo) => todo.completed === false);
+        return state.filter((todo: any) => todo.completed === false);
     },
 }, initialState);

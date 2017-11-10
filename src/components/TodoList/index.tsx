@@ -1,5 +1,5 @@
 import * as React from 'react';
-import TodoItemContainer from '../../containers/TodoItemContainer';
+import TodoItemContainer from '../../containers/TodoApp/TodoItem';
 import * as styles from './style.styl';
 import InputTodo from '../InputTodo';
 

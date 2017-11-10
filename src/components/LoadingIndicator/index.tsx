@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as styles from './style.styl';
+/* tslint:disable */
 import Transition from 'react-transition-group/Transition';
 
 export interface LoadingIndicatorProps extends React.Props<any> {

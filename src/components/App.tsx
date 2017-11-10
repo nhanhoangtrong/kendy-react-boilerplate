@@ -5,8 +5,8 @@ import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
 import history from '../history';
 
-import MainAppContainer from '../containers/MainAppContainer';
-import TodoAppContainer from '../containers/TodoAppContainer';
+import MainAppContainer from '../containers/MainApp';
+import TodoAppContainer from '../containers/TodoApp';
 
 export interface AppProps {
     store: RootStore;

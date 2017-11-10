@@ -5,7 +5,7 @@ import App from './components/App';
 
 const store = configureStore();
 
-ReactDOM.render(
+ReactDOM.hydrate(
     (
         <App store={store} />
     ),

@@ -1,5 +1,4 @@
 import * as React from 'react';
-// <reference path="./index.d.ts" />
 import * as classNames from 'classnames';
 import * as styles from './style.styl';
 import { ActionFunction1, Action } from "redux-actions";

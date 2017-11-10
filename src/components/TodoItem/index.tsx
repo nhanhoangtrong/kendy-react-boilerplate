@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import * as styles from './style.styl';
 import InputTodo from '../InputTodo';
-import { TodoItemContainerProps } from '../../containers/TodoItemContainer';
+import { TodoItemContainerProps } from '../../containers/TodoApp/TodoItem';
 import { Motion, spring } from 'react-motion';
 
 export type TodoItemProps = TodoItemContainerProps;
