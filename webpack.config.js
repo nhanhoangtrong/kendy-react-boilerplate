@@ -58,7 +58,7 @@ module.exports = (env = {}) => {
     const plugins = [
         new HtmlWebpackPlugin({
             title: isProduction ? 'Production' : 'Development',
-            template: path.resolve(__dirname, 'src/index.ejs'),
+            template: path.resolve(__dirname, 'src/template.ejs'),
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'),
