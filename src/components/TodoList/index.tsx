@@ -4,8 +4,8 @@ import * as styles from './style.styl';
 import InputTodo from '../InputTodo';
 
 export interface TodoListProps extends React.Props<any> {
-    todos: TodoItemData[];
-    addTodo: (todo: TodoItemData) => any;
+    todos: TodoApp.Item[];
+    addTodo: (todo: TodoApp.Item) => any;
 }
 
 export default class TodoList extends React.Component<TodoListProps> {

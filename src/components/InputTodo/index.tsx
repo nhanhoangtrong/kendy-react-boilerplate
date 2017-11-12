@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import * as styles from './style.styl';
-import { ActionFunction1, Action } from "redux-actions";
+import { ActionFunction1, Action } from 'redux-actions';
 
 export interface InputTodoProps extends React.Props<any> {
     text?: string;

@@ -8,6 +8,6 @@ const mapDispatchToProps = (dispatch: any) => {
     return {
         addTodo: bindActionCreators(addTodo, dispatch),
     };
-}
+};
 
 export default connect(null, mapDispatchToProps)(TodoList) as any;

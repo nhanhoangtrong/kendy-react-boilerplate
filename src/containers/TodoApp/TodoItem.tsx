@@ -5,13 +5,13 @@ import { Store, Dispatch, bindActionCreators } from 'redux';
 import { editTodo, completeTodo, deleteTodo } from './actions';
 
 export interface TodoItemContainerDispatchProps extends React.Props<any> {
-    completeTodo: ReduxActions.ActionFunction1<TodoItemId, ReduxActions.Action<TodoItemId>>;
-    deleteTodo: ReduxActions.ActionFunction1<TodoItemId, ReduxActions.Action<TodoItemId>>;
-    editTodo: ReduxActions.ActionFunction1<TodoItemData, ReduxActions.Action<TodoItemData>>;
+    completeTodo: ReduxActions.ActionFunction1<string, ReduxActions.Action<string>>;
+    deleteTodo: ReduxActions.ActionFunction1<string, ReduxActions.Action<string>>;
+    editTodo: ReduxActions.ActionFunction1<TodoApp.Item, ReduxActions.Action<TodoApp.Item>>;
 }
 
 export interface TodoItemContainerOwnProps extends React.Props<any> {
-    todo: TodoItemData;
+    todo: TodoApp.Item;
 }
 
 export type TodoItemContainerProps = TodoItemContainerOwnProps & TodoItemContainerDispatchProps;

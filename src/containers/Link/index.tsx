@@ -5,24 +5,39 @@ import { push } from 'react-router-redux';
 
 export interface LinkOwnProps extends React.AnchorHTMLAttributes<any> {
     to: string;
-    children?: React.ReactNode[] | string;
+    children?: React.ReactNode | string;
 }
 
 export interface LinkDispatchProps extends React.Props<any> {
-    pushTo: ReduxActions.ActionFunction1<string, ReduxActions.Action<string>>;
+    pushTo: ReduxActions.ActionFunctionAny<any>;
 }
 
 const mapDispatchToProps = (dispatch: any) => ({
     pushTo: bindActionCreators(push, dispatch),
 });
 
-export default connect<any, any, any>(null, mapDispatchToProps)((props: any) => {
-    return (
-        <a href={props.to} onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-            e.preventDefault();
-            props.pushTo(props.to);
-        }} {...props}>
-            {props.children}
-        </a>
-    );
-});
+export type LinkProps = LinkOwnProps & LinkDispatchProps;
+
+class Link extends React.PureComponent<LinkProps, {}> {
+    constructor(props: LinkProps, ctx?: any) {
+        super(props, ctx);
+        this.onClick = this.onClick.bind(this);
+    }
+    private onClick(e: React.MouseEvent<HTMLAnchorElement>) {
+        e.preventDefault();
+        this.props.pushTo(this.props.to);
+    }
+    public render() {
+        const { to, children, pushTo, ...props } = this.props;
+        return (
+            <a href={to} onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                e.preventDefault();
+                pushTo(to);
+            }} {...props}>
+                {children}
+            </a>
+        );
+    }
+}
+
+export default connect<null, LinkDispatchProps, LinkOwnProps>(null, mapDispatchToProps)(Link);

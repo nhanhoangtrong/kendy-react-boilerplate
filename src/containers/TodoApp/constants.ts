@@ -5,9 +5,9 @@ export const COMPLETE_TODO = 'COMPLETE_TODO';
 export const COMPLETE_ALL = 'COMPLETE_ALL';
 export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';
 
-export const SHOW_ALL: TodoFilterType = 'SHOW_ALL';
-export const SHOW_ACTIVE: TodoFilterType = 'SHOW_ACTIVE';
-export const SHOW_COMPLETED: TodoFilterType = 'SHOW_COMPLETED';
+export const SHOW_ALL: TodoApp.Filter = 'SHOW_ALL';
+export const SHOW_ACTIVE: TodoApp.Filter = 'SHOW_ACTIVE';
+export const SHOW_COMPLETED: TodoApp.Filter = 'SHOW_COMPLETED';
 export const KEY: string = 'filter';
 export const FILTER_TYPES = [
     SHOW_ALL,

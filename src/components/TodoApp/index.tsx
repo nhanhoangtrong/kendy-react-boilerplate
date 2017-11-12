@@ -10,10 +10,10 @@ import LoadingIndicator from '../LoadingIndicator';
 
 export interface TodoAppProps extends RouteComponentProps<any> {
     isLoading: boolean;
-    filter: TodoFilterType;
+    filter: TodoApp.Filter;
     globalsActions: any;
     todosActions: any;
-    todos: TodoItemData[];
+    todos: TodoApp.Item[];
 }
 
 export default class TodoApp extends React.Component<TodoAppProps> {

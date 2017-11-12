@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import * as ActionTypes from './constants';
 
-const initialState: TodoItemData[] = [{
+const initialState: TodoApp.Item[] = [{
     id: '1',
     text: 'Temp Todo',
     completed: false,
@@ -17,7 +17,7 @@ export default handleActions<any, any>({
     },
 
     [ActionTypes.DELETE_TODO]: (state, action) => {
-        return state.filter((todo: TodoItemData) => todo.id !== action.payload);
+        return state.filter((todo: TodoApp.Item) => todo.id !== action.payload);
     },
 
     [ActionTypes.EDIT_TODO]: (state, action) => {
