@@ -6,8 +6,8 @@ export default class NavBar extends React.Component<any, any> {
     public render() {
         return (
             <nav className={styles.navbar}>
-                <Link className="abc" to="/">Index</Link>
-                <Link to="/todo">TodoApp</Link>
+                <Link className="abc" href="/">Index</Link>
+                <Link href="/todo">TodoApp</Link>
             </nav>
         );
     }

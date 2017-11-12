@@ -1,17 +1,18 @@
 import * as React from 'react';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
+import { push, RouterAction } from 'react-router-redux';
 import MainApp from '../../components/MainApp';
+import { LocationDescriptorObject } from 'history';
 
-export interface MainAppContainerDispatchProps extends React.Props<any> {
-    push: ReduxActions.ActionFunction1<string, ReduxActions.Action<string>>;
+export interface MainAppDispatchProps {
+    push: (location: string | LocationDescriptorObject, state?: any) => RouterAction;
 }
 
-export type MainAppContainerProps = MainAppContainerDispatchProps;
+export type MainAppProps = MainAppDispatchProps;
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
     push: bindActionCreators(push, dispatch),
 });
 
-export default connect<null, any, null>(null, mapDispatchToProps)(MainApp);
+export default connect<null, MainAppDispatchProps, null>(null, mapDispatchToProps)(MainApp);

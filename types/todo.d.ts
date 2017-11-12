@@ -6,4 +6,9 @@ declare namespace TodoApp {
     }
 
     export type Filter = 'SHOW_ALL' | 'SHOW_ACTIVE' | 'SHOW_COMPLETED';
+
+    export interface State {
+        filter: Filter;
+        items: Item[];
+    }
 }

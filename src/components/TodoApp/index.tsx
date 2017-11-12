@@ -7,29 +7,13 @@ import NavBar from '../NavBar';
 import InputTodo from '../InputTodo';
 import TodoList from '../TodoList';
 import LoadingIndicator from '../LoadingIndicator';
+import { TodoAppProps } from '../../containers/TodoApp';
 
-export interface TodoAppProps extends RouteComponentProps<any> {
-    isLoading: boolean;
-    filter: TodoApp.Filter;
-    globalsActions: any;
-    todosActions: any;
-    todos: TodoApp.Item[];
-}
-
-export default class TodoApp extends React.Component<TodoAppProps> {
-    constructor(props?: TodoAppProps, context?: any) {
-        super(props, context);
-    }
-
-    public render() {
-        const { match } = this.props;
-        return (
-            <div className={styles.todoApp}>
-                <h1>Hello, filter is {this.props.filter} and isLoading is {this.props.isLoading ? 'true' : 'false'}! <button onClick={this.props.globalsActions.waitLoading}>toggle</button></h1>
-                <TodoList todos={this.props.todos} addTodo={this.props.todosActions.addTodo}/>
-                <LoadingIndicator visible={this.props.isLoading} />
-                <NavBar />
-            </div>
-        );
-    }
-}
+export default (props: TodoAppProps) => (
+    <div className={styles.todoApp}>
+        <h1>Hello, filter is {props.filter} and isLoading is {props.isLoading ? 'true' : 'false'}! <button onClick={props.toggleLoading}>toggle</button></h1>
+        <TodoList todos={props.items} addTodo={props.addTodo} />
+        <LoadingIndicator visible={props.isLoading} />
+        <NavBar />
+    </div>
+);

@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
+import { push, RouterAction } from 'react-router-redux';
+import { LocationDescriptorObject } from 'history';
 
 export interface LinkOwnProps extends React.AnchorHTMLAttributes<any> {
-    to: string;
+    href: string;
     children?: React.ReactNode | string;
 }
 
 export interface LinkDispatchProps extends React.Props<any> {
-    pushTo: ReduxActions.ActionFunctionAny<any>;
+    pushTo: (location: string | LocationDescriptorObject, state?: any) => RouterAction;
 }
 
 const mapDispatchToProps = (dispatch: any) => ({
@@ -25,14 +26,14 @@ class Link extends React.PureComponent<LinkProps, {}> {
     }
     private onClick(e: React.MouseEvent<HTMLAnchorElement>) {
         e.preventDefault();
-        this.props.pushTo(this.props.to);
+        this.props.pushTo(this.props.href);
     }
     public render() {
-        const { to, children, pushTo, ...props } = this.props;
+        const { href, children, pushTo, ...props } = this.props;
         return (
-            <a href={to} onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+            <a href={href} onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
                 e.preventDefault();
-                pushTo(to);
+                pushTo(href);
             }} {...props}>
                 {children}
             </a>

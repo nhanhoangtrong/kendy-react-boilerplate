@@ -2,11 +2,7 @@ import * as React from 'react';
 import TodoItemContainer from '../../containers/TodoApp/TodoItem';
 import * as styles from './style.styl';
 import InputTodo from '../InputTodo';
-
-export interface TodoListProps extends React.Props<any> {
-    todos: TodoApp.Item[];
-    addTodo: (todo: TodoApp.Item) => any;
-}
+import { TodoListProps } from '../../containers/TodoApp/TodoList';
 
 export default class TodoList extends React.Component<TodoListProps> {
     constructor(props?: TodoListProps, context?: any) {

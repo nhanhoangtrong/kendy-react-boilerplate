@@ -1,13 +1,11 @@
 import { createAction } from 'redux-actions';
-import { TOGGLE_LOADING, SET_FILTER } from './constants';
+import { TOGGLE_LOADING } from './constants';
+import { Dispatch } from 'redux';
 
 export const toggleLoading = createAction(TOGGLE_LOADING);
-export const setFilter = createAction<TodoApp.Filter>(SET_FILTER);
 export const waitLoading = () => {
-    console.log('is waiting');
-    return (dispatch: any) => {
+    return (dispatch: Dispatch<any>) => {
         setTimeout(() => {
-            console.log('it worked!');
             dispatch(toggleLoading());
         }, 1000);
     };

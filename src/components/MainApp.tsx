@@ -1,11 +1,9 @@
 import * as React from 'react';
 import Link from '../containers/Link';
-import { MainAppContainerProps } from '../containers/MainApp';
+import { MainAppProps } from '../containers/MainApp';
 
-export type MainAppProps = MainAppContainerProps;
-
-export default class MainApp extends React.Component<MainAppContainerProps, {}> {
-    constructor(props?: any, context?: any) {
+export default class MainApp extends React.Component<MainAppProps, {}> {
+    constructor(props?: MainAppProps, context?: any) {
         super(props, context);
         this.onClickGoTodo = this.onClickGoTodo.bind(this);
     }

@@ -3,7 +3,7 @@ import * as classNames from 'classnames';
 import * as styles from './style.styl';
 import { ActionFunction1, Action } from 'redux-actions';
 
-export interface InputTodoProps extends React.Props<any> {
+export interface InputTodoProps {
     text?: string;
     placeholder?: string;
     editing?: boolean;
@@ -12,12 +12,12 @@ export interface InputTodoProps extends React.Props<any> {
     onCancel?(): any;
 }
 
-export interface InputTodoState extends React.ComponentState {
+export interface InputTodoState {
     text: string;
 }
 
 export default class InputTodo extends React.Component<InputTodoProps, InputTodoState> {
-    public constructor(props?: InputTodoProps, context?: any) {
+    constructor(props?: InputTodoProps, context?: any) {
         super(props, context);
         this.state = {
             text: this.props.text || '',

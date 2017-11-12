@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import { RootStore } from '../store';
 import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
 import history from '../history';
 
 import MainAppContainer from '../containers/MainApp';
 import TodoAppContainer from '../containers/TodoApp';
+import { RootStore } from '../store/types';
 
 export interface AppProps {
     store: RootStore;

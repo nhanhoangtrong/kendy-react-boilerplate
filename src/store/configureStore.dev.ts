@@ -1,18 +1,18 @@
 import { createStore, Reducer, Store } from 'redux';
 import rootReducer from './rootReducer';
 import enhancer from './enhancer';
+import { RootState } from './types';
 
-export default (initialState?: any): Store<any> => {
+export default (initialState?: RootState): Store<RootState> => {
     const create = window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__()(createStore) : createStore;
 
-    const createStoreWithMiddleware = enhancer(create);
+    const createStoreWithMiddleware = enhancer<RootState>(create);
 
-    const store = createStoreWithMiddleware(rootReducer, initialState) as Store<any>;
+    const store = createStoreWithMiddleware(rootReducer, initialState);
 
     if (module.hot) {
         module.hot.accept('./rootReducer', () => {
-            console.log('Replacing root reducer...');
-            const nextReducer = require('./rootReducer').default as Reducer<any>;
+            const nextReducer = require('./rootReducer').default as Reducer<RootState>;
             store.replaceReducer(nextReducer);
         });
     }
