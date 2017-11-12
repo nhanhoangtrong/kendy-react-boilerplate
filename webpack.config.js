@@ -27,7 +27,7 @@ module.exports = (env = {}) => {
     const sourcePath = path.join(__dirname, 'src');
     const buildPath = path.join(__dirname, 'dist');
 
-    const devtool = isProduction ? 'source-map' : 'eval-source-map';
+    const devtool = isProduction ? 'source-map' : 'inline-source-map';
     const devServer = {
         contentBase: buildPath,
         host: devHost,
@@ -115,7 +115,7 @@ module.exports = (env = {}) => {
                 '.json',
             ],
             alias: {
-                '@': path.resolve(__dirname, 'src/'),
+                '@app': path.resolve(__dirname, 'src/'),
             },
         },
         target: 'web',
