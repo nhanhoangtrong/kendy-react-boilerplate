@@ -6,6 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const chalk = require('chalk');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 dotenv.load({
     path: path.join(__dirname, '.env'),
@@ -71,6 +72,10 @@ module.exports = (env = {}) => {
         new CleanWebpackPlugin(['dist']),
         extractCSSPlugin,
         extractStylusPlugin,
+        new ForkTsCheckerWebpackPlugin({
+            tsconfig: path.resolve(__dirname, 'tsconfig.json'),
+            tslint: path.resolve(__dirname, 'tslint.json'),
+        }),
     ];
     if (!isProduction) {
         plugins.concat([
@@ -124,20 +129,20 @@ module.exports = (env = {}) => {
             rules: [
                 {
                     test: /\.tsx?$/,
-                    use: isProduction ? 'awesome-typescript-loader?module=es6' : [
-                        'react-hot-loader/webpack',
-                        'awesome-typescript-loader',
-                    ],
-                },
-                {
-                    enforce: 'pre',
-                    test: /\.tsx?$/,
-                    use: {
-                        loader: 'tslint-loader',
+                    use: isProduction ? {
+                        loader: 'ts-loader',
                         options: {
-                            emitErrors: true,
+                            transpileOnly: true,
                         },
-                    },
+                    } : [
+                        'react-hot-loader/webpack',
+                        {
+                            loader: 'ts-loader',
+                            options: {
+                                transpileOnly: true,
+                            },
+                        },
+                    ],
                 },
                 {
                     enforce: 'pre',
