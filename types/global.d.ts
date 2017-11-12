@@ -25,4 +25,5 @@ declare const __DEV__: boolean;
 // for redux devtools extension
 declare interface Window {
     __REDUX_DEVTOOLS_EXTENSION__?(): (args?: any) => any;
+    __PRELOADED_STATE__?: any;
 }

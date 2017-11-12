@@ -4,7 +4,7 @@ import configureStore from './store';
 import { AppContainer } from 'react-hot-loader';
 import App, { AppRootComponent } from './components/App';
 
-const store = configureStore();
+const store = configureStore(window.__PRELOADED_STATE__);
 
 const render = (AppComponent: AppRootComponent) => {
     ReactDOM.render(
