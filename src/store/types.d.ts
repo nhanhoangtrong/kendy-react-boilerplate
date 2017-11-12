@@ -1,5 +1,5 @@
-import { Store, Dispatch } from "redux";
-import { RouterState } from "react-router-redux";
+import { Store, Dispatch } from 'redux';
+import { RouterState } from 'react-router-redux';
 
 declare interface RootState {
     todos: TodoApp.State;
