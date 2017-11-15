@@ -27,7 +27,7 @@ module.exports = (env = {}) => {
     const sourcePath = path.join(__dirname, 'src');
     const buildPath = path.join(__dirname, 'dist');
 
-    const devtool = isProduction ? 'source-map' : 'inline-source-map';
+    const devtool = isProduction ? 'source-map' : 'cheap-module-eval-source-map';
     const devServer = {
         contentBase: buildPath,
         host: devHost,
@@ -72,15 +72,15 @@ module.exports = (env = {}) => {
         new CleanWebpackPlugin(['dist']),
         extractCSSPlugin,
         extractStylusPlugin,
-        new ForkTsCheckerWebpackPlugin({
-            tsconfig: path.resolve(__dirname, 'tsconfig.json'),
-            tslint: path.resolve(__dirname, 'tslint.json'),
-        }),
     ];
     if (!isProduction) {
         plugins.concat([
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NamedModulesPlugin(),
+            new ForkTsCheckerWebpackPlugin({
+                tsconfig: path.resolve(__dirname, 'tsconfig.json'),
+                tslint: path.resolve(__dirname, 'tslint.json'),
+            }),
         ]);
     } else {
         plugins.concat([
@@ -129,6 +129,7 @@ module.exports = (env = {}) => {
             rules: [
                 {
                     test: /\.tsx?$/,
+                    include: sourcePath,
                     use: isProduction ? {
                         loader: 'ts-loader',
                         options: {
@@ -164,6 +165,7 @@ module.exports = (env = {}) => {
                                     sourceMap: !isProduction,
                                     importLoaders: 1,
                                     localIdentName: '[local]__[hash:base64:5]',
+                                    minimize: isProduction,
                                 },
                             },
                             'stylus-loader',
@@ -172,6 +174,20 @@ module.exports = (env = {}) => {
                 },
                 {
                     test: /\.css$/,
+                    exclude: sourceMap,
+                    use: extractCSSPlugin.extract({
+                        fallback: 'style-loader',
+                        use: {
+                            loader: 'css-loader',
+                            options: {
+                                minimize: isProduction,
+                            },
+                        },
+                    }),
+                },
+                {
+                    test: /\.css$/,
+                    include: sourcePath,
                     use: extractCSSPlugin.extract({
                         fallback: 'style-loader',
                         use: [
@@ -183,6 +199,7 @@ module.exports = (env = {}) => {
                                     sourceMap: !isProduction,
                                     importLoaders: 1,
                                     localIdentName: '[local]__[hash:base64:5]',
+                                    minimize: isProduction,
                                 },
                             },
                         ],
