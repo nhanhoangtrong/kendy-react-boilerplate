@@ -17,7 +17,11 @@ declare module '*.json' {
 }
 
 // Global setInterval for web
-declare function setInterval(callback: (...args: any[]) => void, ms: number, ...args: any[]): number;
+declare function setInterval(
+    callback: (...args: any[]) => void,
+    ms: number,
+    ...args: any[]
+): number;
 
 // Global Webpack constant
 declare const __DEV__: boolean;

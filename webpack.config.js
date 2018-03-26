@@ -15,19 +15,26 @@ dotenv.load({
 const vendors = Object.keys(require('./package.json').dependencies);
 
 module.exports = (env = {}) => {
-    const isProduction = env.production == 'true' || process.env.NODE_ENV === 'production';
+    const isProduction =
+        env.production == 'true' || process.env.NODE_ENV === 'production';
 
     const publicPath = env.publicPath || process.env.PUBLIC_PATH || '/';
 
     const devHost = env.host || process.env.DEV_HOST || 'localhost';
-    const devPort = parseInt(env.port) || parseInt(process.env.DEV_PORT) || 8080;
+    const devPort =
+        parseInt(env.port) || parseInt(process.env.DEV_PORT) || 8080;
 
-    console.log(chalk.green('running webpack with isProduction:'), chalk.yellow(isProduction));
+    console.log(
+        chalk.green('running webpack with isProduction:'),
+        chalk.yellow(isProduction)
+    );
 
     const sourcePath = path.join(__dirname, 'src');
     const buildPath = path.join(__dirname, 'dist');
 
-    const devtool = isProduction ? 'source-map' : 'cheap-module-eval-source-map';
+    const devtool = isProduction
+        ? 'source-map'
+        : 'cheap-module-eval-source-map';
     const devServer = {
         contentBase: buildPath,
         host: devHost,
@@ -36,7 +43,8 @@ module.exports = (env = {}) => {
             // Fixing public path for generated HTML file in development
             index: publicPath,
             rewrites: {
-                from: /./, to: publicPath,
+                from: /./,
+                to: publicPath,
             },
         },
         hot: true,
@@ -61,14 +69,16 @@ module.exports = (env = {}) => {
             template: path.resolve(__dirname, 'src/template.ejs'),
         }),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'),
+            'process.env.NODE_ENV': JSON.stringify(
+                isProduction ? 'production' : 'development'
+            ),
             __DEV__: !isProduction,
         }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendors',
-            filename: 'vendors.bundle.js',
-            minChunks: Infinity,
-        }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: 'vendors',
+        //     filename: 'vendors.bundle.js',
+        //     minChunks: Infinity,
+        // }),
         new CleanWebpackPlugin(['dist']),
         extractCSSPlugin,
         extractStylusPlugin,
@@ -92,28 +102,22 @@ module.exports = (env = {}) => {
         ]);
     }
 
-    const entry = isProduction ? {
-        app: './index.ts',
-        vendors: vendors,
-    } : {
-        app: [
-            'react-hot-loader/patch',
-            './index.ts',
-        ],
-        vendors: vendors,
-    };
+    const entry = isProduction
+        ? {
+              app: './index.ts',
+              vendors: vendors,
+          }
+        : {
+              app: ['react-hot-loader/patch', './index.ts'],
+              vendors: vendors,
+          };
 
     const defaultConfig = {
+        mode: isProduction ? 'production' : 'development',
         entry: entry,
         resolve: {
-            modules: [
-                'node_modules',
-            ],
-            extensions: [
-                '.ts', '.tsx',
-                '.js', '.jsx',
-                '.json',
-            ],
+            modules: ['node_modules'],
+            extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
             alias: {
                 '@app': path.resolve(__dirname, 'src/'),
             },
@@ -130,27 +134,33 @@ module.exports = (env = {}) => {
                 {
                     test: /\.tsx?$/,
                     include: sourcePath,
-                    use: isProduction ? {
-                        loader: 'ts-loader',
-                        options: {
-                            transpileOnly: true,
-                        },
-                    } : [
-                        'react-hot-loader/webpack',
-                        {
-                            loader: 'ts-loader',
-                            options: {
-                                transpileOnly: true,
-                            },
-                        },
-                    ],
+                    use: isProduction
+                        ? {
+                              loader: 'ts-loader',
+                              options: {
+                                  transpileOnly: true,
+                              },
+                          }
+                        : [
+                              {
+                                  loader: 'babel-loader',
+                                  options: {
+                                      babelrc: true,
+                                      plugins: ['react-hot-loader/babel'],
+                                  },
+                              },
+                              {
+                                  loader: 'ts-loader',
+                                  options: {
+                                      transpileOnly: true,
+                                  },
+                              },
+                          ],
                 },
                 {
                     enforce: 'pre',
                     test: /\.js$/,
-                    use: [
-                        'source-map-loader',
-                    ],
+                    use: ['source-map-loader'],
                 },
                 {
                     test: /\.styl$/,
@@ -174,7 +184,7 @@ module.exports = (env = {}) => {
                 },
                 {
                     test: /\.css$/,
-                    exclude: sourceMap,
+                    exclude: sourcePath,
                     use: extractCSSPlugin.extract({
                         fallback: 'style-loader',
                         use: {
@@ -213,7 +223,7 @@ module.exports = (env = {}) => {
                             options: {
                                 name: '[path][name].[ext]',
                             },
-                        }
+                        },
                     ],
                 },
             ],

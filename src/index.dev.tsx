@@ -8,19 +8,21 @@ const store = configureStore(window.__PRELOADED_STATE__);
 
 const render = (AppComponent: AppRootComponent) => {
     ReactDOM.render(
-        (
-            <AppContainer>
-                <AppComponent store={store} />
-            </AppContainer>
-        ),
-        document.getElementById('app'),
+        <AppContainer>
+            <AppComponent store={store} />
+        </AppContainer>,
+        document.getElementById('app')
     );
 };
 
 render(App);
 
 if (module.hot) {
-    console.log(`Development is running with NODE_ENV=${process.env.NODE_ENV} and __DEV__=${__DEV__}`);
+    console.log(
+        `Development is running with NODE_ENV=${
+            process.env.NODE_ENV
+        } and __DEV__=${__DEV__}`
+    );
     module.hot.accept('./components/App', () => {
         console.log('Replacing next "App" Component...');
         const NextApp = require('./components/App').default;

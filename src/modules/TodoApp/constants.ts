@@ -9,8 +9,4 @@ export const SHOW_ALL: TodoApp.Filter = 'SHOW_ALL';
 export const SHOW_ACTIVE: TodoApp.Filter = 'SHOW_ACTIVE';
 export const SHOW_COMPLETED: TodoApp.Filter = 'SHOW_COMPLETED';
 export const KEY: string = 'filter';
-export const FILTER_TYPES = [
-    SHOW_ALL,
-    SHOW_ACTIVE,
-    SHOW_COMPLETED,
-];
+export const FILTER_TYPES = [SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED];

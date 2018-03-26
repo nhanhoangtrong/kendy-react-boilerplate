@@ -6,7 +6,10 @@ import TodoList from '../../components/TodoList';
 import { RootDispatch } from '../../store/types';
 
 export interface TodoListDispatchProps {
-    addTodo: ReduxActions.ActionFunction1<TodoApp.Item, ReduxActions.Action<TodoApp.Item>>;
+    addTodo: ReduxActions.ActionFunction1<
+        TodoApp.Item,
+        ReduxActions.Action<TodoApp.Item>
+    >;
 }
 
 export interface TodoListOwnProps {
@@ -21,4 +24,7 @@ const mapDispatchToProps = (dispatch: RootDispatch) => {
     };
 };
 
-export default connect<null, TodoListDispatchProps, TodoListOwnProps>(null, mapDispatchToProps)(TodoList);
+export default connect<null, TodoListDispatchProps, TodoListOwnProps>(
+    null,
+    mapDispatchToProps
+)(TodoList);

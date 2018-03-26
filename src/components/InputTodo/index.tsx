@@ -16,7 +16,10 @@ export interface InputTodoState {
     text: string;
 }
 
-export default class InputTodo extends React.Component<InputTodoProps, InputTodoState> {
+export default class InputTodo extends React.Component<
+    InputTodoProps,
+    InputTodoState
+> {
     constructor(props?: InputTodoProps, context?: any) {
         super(props, context);
         this.state = {
@@ -40,11 +43,15 @@ export default class InputTodo extends React.Component<InputTodoProps, InputTodo
                 type="text"
                 value={this.state.text}
                 onChange={this.handleTextChange}
-                onKeyUp={this.handleKeyUp} />
+                onKeyUp={this.handleKeyUp}
+            />
         );
     }
 
-    public componentWillReceiveProps(nextProps: Readonly<InputTodoProps>, nextContext: any) {
+    public componentWillReceiveProps(
+        nextProps: Readonly<InputTodoProps>,
+        nextContext: any
+    ) {
         if (nextProps.text) {
             this.setState({
                 text: nextProps.text,

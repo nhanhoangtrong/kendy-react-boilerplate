@@ -36,4 +36,7 @@ const mapDispatchToProps = (dispatch: RootDispatch) => ({
     addTodo: bindActionCreators(addTodo, dispatch),
 });
 
-export default connect<TodoAppStateProps, TodoAppDispatchProps, {}>(mapStateToProps, mapDispatchToProps)(TodoApp);
+export default connect<TodoAppStateProps, TodoAppDispatchProps, {}>(
+    mapStateToProps,
+    mapDispatchToProps
+)(TodoApp);

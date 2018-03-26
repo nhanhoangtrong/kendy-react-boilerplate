@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Link from '../containers/Link';
-import { MainAppProps } from '../containers/MainApp';
+import Link from '../modules/Link';
+import { MainAppProps } from '../modules/MainApp';
 
 export default class MainApp extends React.Component<MainAppProps, {}> {
     constructor(props?: MainAppProps, context?: any) {
@@ -11,7 +11,9 @@ export default class MainApp extends React.Component<MainAppProps, {}> {
     public render() {
         return (
             <div>
-                <button type="button" onClick={this.onClickGoTodo}>Request Todo App</button>
+                <button type="button" onClick={this.onClickGoTodo}>
+                    Request Todo App
+                </button>
             </div>
         );
     }
